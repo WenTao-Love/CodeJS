@@ -3,6 +3,19 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script type="text/javascript">
+		function addLoadEvent(func){
+                var oldonload = window.onload;
+                if(typeof window.onload != 'function'){
+                    window.onload = func;
+                }else{
+                    window.onload = function(){
+                        oldonload();
+                        func();
+                    }
+                }
+            }
+	</script>
 </head>
 <body>
 	<!-- **************************************************************************** -->
@@ -18,7 +31,7 @@
 	
 	
 	<script type="text/javascript">
-		window.onload = function(){
+		var funcRemoveSpace = function(){
 			var _rstrsBtn = document.getElementById("rstrsBtn");
 			var _strs = document.getElementById("strs");
 
@@ -26,6 +39,7 @@
 				_strs.value = _strs.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"");
 			}
 		}
+		addLoadEvent(funcRemoveSpace);
 	</script>
 	<hr>
 	<!-- **************************************************************************** -->
@@ -46,7 +60,7 @@
 			return !chars?true:false;
 			//return chars.length == 0?true:false;
 		}
-		window.onload = function(){
+		var funcIsContent = function(){
 			var _isContentBtn = document.getElementById("isContentBtn");
 			var _isContent = document.getElementById("isContent");
 
@@ -59,6 +73,7 @@
 				}
 			}
 		}
+		addLoadEvent(funcIsContent);
 	</script>
 	<hr>
 	<!-- **************************************************************************** -->
@@ -98,7 +113,7 @@
 	</div>
 
 	<script type="text/javascript">
-		window.onload = function(){
+		var funcDisabledInput = function(){
 			//方式一 简洁、高效
 			var _disabledInput1 = document.getElementById("disabledInput1");
 			_disabledInput1.onfocus = function(){
@@ -112,9 +127,63 @@
 			_disabledInput2.onkeyup = noText;
 			_disabledInput2.onblur = noText;
 		}
+		addLoadEvent(funcDisabledInput);
 	</script>
-
 	<hr>
 	<!-- **************************************************************************** -->
+	<p class="h3">禁用中文输入法</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="disInputMethod" value="不支持Chrome">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" isDisInputMethod="1" id="disInputMethodChrome" value="支持Chrome">
+		</div>
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		//设置属性，不支持chrome浏览器
+		function disInputMethod(_elementArr){
+			var arr = _elementArr;
+			if(!(_elementArr instanceof Array)){
+				arr = [_elementArr];
+			};
+
+			for(var i=0,arrLength = arr.length;i<arrLength;i++){
+				var _arr = arr[i];
+				_arr.onfocus = function(){
+					this.style.imeMode = 'disabled';
+				}
+			}
+		}
+		var _disInputMethod = document.getElementById("disInputMethod");
+		disInputMethod(_disInputMethod);
+
+		//通过替换，模拟禁用输入法
+		function funcDisInputMethodChrome(){
+			var _disInputMethodChome = document.getElementById("disInputMethodChrome");
+			_disInputMethodChome.onfocus = function(){
+				this.style.imeMode = 'disabled';
+			}
+			var _isDisInputMethodChrome = _disInputMethodChome.getAttribute("isDisInputMethod");
+			if(_isDisInputMethodChrome){
+				var clearChinese = function(_this){
+					var _value = _this.value;
+					_this.value = _value.replace(/[\u4e00-\u9fa5]/g,"");
+				}
+				_disInputMethodChome.onkeyup = function(){
+					clearChinese(this);
+				}
+				_disInputMethodChome.onblur = function(){
+					clearChinese(this);
+				}
+			}
+		}
+		funcDisInputMethodChrome();
+	</script>
 </body>
 </html>
