@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- **************************************************************************** -->
+	<p class="h3">去掉空格</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="strs" value="   		需要过滤空格   ">
+		</div>
+			<button type="button" class="btn btn-primary col-md-1" id="rstrsBtn" >过滤</button>
+	</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+		window.onload = function(){
+			var _rstrsBtn = document.getElementById("rstrsBtn");
+			var _strs = document.getElementById("strs");
+
+			_rstrsBtn.onclick = function(){
+				_strs.value = _strs.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"");
+			}
+		}
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+	<p class="h3">验证是否为空</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="isContent" placeholder="输入数据">
+		</div>
+			<button type="button" class="btn btn-primary col-md-1" id="isContentBtn" >验证是否为空</button>
+	</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+		//判断是否为空
+		function isContent(chars){ 
+			return !chars?true:false;
+			//return chars.length == 0?true:false;
+		}
+		window.onload = function(){
+			var _isContentBtn = document.getElementById("isContentBtn");
+			var _isContent = document.getElementById("isContent");
+
+			_isContentBtn.onclick = function(){
+				//通过过滤空格制表符等，如果[！XXX]为真，则表明不为空
+				if(!_isContent.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"")){
+					alert("您的输入为空！");	
+				}else{
+					alert("您的输入不为空！");
+				}
+			}
+		}
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+	<p class="h3">禁用输入框</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" placeholder="正常的输入框">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" disabled placeholder="使用disabled禁用">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" disabled="diabled" placeholder="使用disabled='disabled'禁用">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" readonly placeholder="使用readonly禁用(可以tab选中)">
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="disabledInput1" placeholder="控制失去焦点">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="disabledInput2" placeholder="设置输入内容替换为空">
+		</div>
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			//方式一 简洁、高效
+			var _disabledInput1 = document.getElementById("disabledInput1");
+			_disabledInput1.onfocus = function(){
+				_disabledInput1.blur();
+			}
+			//会有闪的感觉
+			var _disabledInput2 = document.getElementById("disabledInput2");
+			var noText = function(){
+				_disabledInput2.value = "";
+			}
+			_disabledInput2.onkeyup = noText;
+			_disabledInput2.onblur = noText;
+		}
+	</script>
+
+	<hr>
+	<!-- **************************************************************************** -->
+</body>
+</html>
