@@ -23,3 +23,6 @@ This is code example of Javascript.
 【chap2-3.html】
 1 限制字符串长度
 2 （支持中英文区分）限制字符串长度
+【chap2-4.html】
+1 实时提示可输入的字符（区分中英文）
+2 在输入框中提示信息
