@@ -194,6 +194,27 @@
 					alert("回车提交成功");
 				}
 			}
+			//FileFox 和 Opera
+			// function keyDown(e) {  
+			//    var keycode = e.which;  
+			//    var realkey = String.fromCharCode(e.which);  
+			//    alert("按键码: " + keycode + " 字符: " + realkey);  }
+
+			// IE中
+			//   function keyDown() {  
+			//    var keycode = window.event.keyCode;  
+			//    var realkey = String.fromCharCode(event.keyCode);  
+			// 　　     alert("按键码: " + keycode + " 字符: " + realkey);  
+			//   } 
+
+			// 简单的识别浏览器的方法：
+			// 　　    function keyUp(e) {
+			// 	       　 var currKey=0,e=e||event; //进行浏览器事件对象获取的兼容
+			// 	      　  currKey=e.keyCode||e.which||e.charCode; //为了兼容浏览器按键事件对象的按键码属性
+			// 	      　　var keyName = String.fromCharCode(currKey);
+			// 	       　 alert("按键码: " + currKey + " 字符: " + keyName);
+			// 	       }
+			// 	       document.onkeyup = keyUp;
 		};
 		addLoadEvent(funcEnterSubmit);
 	</script>
