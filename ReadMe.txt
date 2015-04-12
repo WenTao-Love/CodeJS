@@ -26,3 +26,7 @@ This is code example of Javascript.
 【chap2-4.html】
 1 实时提示可输入的字符（区分中英文）
 2 在输入框中提示信息
+【chap2-5.html】
+1 自动显示滚动条
+2 密码强度实时验证
+3 回车提交表单
