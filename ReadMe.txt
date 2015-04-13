@@ -35,3 +35,5 @@ This is code example of Javascript.
 2 禁止文本框的记忆功能
 3 自动选定文本内容
 4 获取和失去焦点时，改变样式
+【chap2-7.html】
+1 常用的基于正则的验证
