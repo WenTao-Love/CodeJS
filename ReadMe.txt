@@ -37,3 +37,8 @@ This is code example of Javascript.
 4 获取和失去焦点时，改变样式
 【chap2-7.html】
 1 常用的基于正则的验证
+【chap2-8.html】
+1 对文本内容进行关键词过滤
+2 从字符串中剔除所有的HTML代码
+3 检测是否为数值型
+4 TextArea自适应文本行数
