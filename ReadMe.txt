@@ -42,7 +42,7 @@ This is code example of Javascript.
 2 从字符串中剔除所有的HTML代码
 3 检测是否为数值型
 4 TextArea自适应文本行数
-【chap2-8.html】
+【chap2-9.html】
 1 判断单选框是否选中
 2 判断复选框至少选中一项
 3 限制复选框最多选择几项
