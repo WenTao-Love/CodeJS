@@ -133,33 +133,160 @@
 	</script>
 	<hr>
 	<!-- **************************************************************************** -->
-	<p class="h3">示例内容</p>
+	<p class="h3">下拉框二级联动效果</p>
 	<div class="container">
 	<div class="row">
 		<div class="col-md-4">
-			<input type="text" class="form-control">
+			省级：
+			<select class="form-control" id="provinces">
+			</select>
 		</div>
-		<button type="button" class="btn btn-primary col-md-1" >模板</button>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			市级：
+			<select class="form-control" id="citys">
+			</select>
+		</div>
 	</div>
 	</div>
 	
 	<script type="text/javascript">
- 
+ 		var funcProvinceCity = function(){
+ 			var linkDatas = {
+ 				provinces:[
+ 					{
+ 						"code":"0",
+ 						"name":"请选择"
+ 					},
+ 					{
+ 						"code":"1",
+ 						"name":"北京"
+ 					},
+ 					{
+ 						"code":"2",
+ 						"name":"天津"
+ 					},
+ 					{
+ 						"code":"3",
+ 						"name":"河北"
+ 					}
+ 				],
+ 				citys:{
+ 					0:["请选择"],
+ 					1:["朝阳区","海淀区","东城区","西城区","房山区","其他"],
+ 					2:["天津"],
+ 					3:["沧州","石家庄","秦皇岛","其他"],
+ 				}
+ 			};
+ 			function addOptions(target,options){
+ 				var _option = null;
+ 				var ol = options.length;
+ 				var _v = "";
+ 				var _t = "";
+ 				for(var i=0; i<ol ; i++){
+ 					_v = options[i].value;
+ 					_t = options[i].text;
+ 					_option = document.createElement("option");
+ 					_option.value = _v;
+ 					_option.text = _t;
+ 					target.options.add(_option);
+ 				}
+ 			}
+ 			function linkage(parents,childs){
+ 				var _linkDatas = linkDatas;
+ 				var _parents = _linkDatas.provinces;
+ 				var _childs = _linkDatas.citys;
+ 				var _initCity = _childs[0];
+ 				var _p = [];
+
+ 				for(var i in _parents){
+ 					_p.push({
+ 						"text":_parents[i].name,
+ 						"value":_parents[i].code
+ 					});
+ 				}
+
+ 				addOptions(parents,_p);
+
+ 				addOptions(childs,[{
+ 					"value":_initCity,
+ 					"text":_initCity
+ 				}]);
+
+ 				parents.onchange = function(){
+ 					var _cs = _childs[this.value];//通过省级的代码值，查询其子节点
+ 					var _childsLen = _cs.length;
+ 					var _p = [];
+ 					childs.innerHTML = "";
+ 					for(var i=0;i<_childsLen;i++){
+ 						_p.push({
+ 							"value":_cs[i],
+ 							"text":_cs[i]
+ 						});
+ 					}
+ 					addOptions(childs,_p);
+ 				}
+ 			}
+ 			linkage(document.getElementById("provinces"),document.getElementById("citys"));
+ 		};
+ 		addLoadEvent(funcProvinceCity);
 	</script>
 	<hr>
 	<!-- **************************************************************************** -->
-	<p class="h3">示例内容</p>
+	<p class="h3">可输入的下拉框</p>
 	<div class="container">
 	<div class="row">
 		<div class="col-md-4">
-			<input type="text" class="form-control">
+			<select class="form-control" id="inOption">
+				<option value="">请选择</option>
+				<option value="1">选项1</option>
+				<option value="2">选项2</option>
+			</select>
 		</div>
-		<button type="button" class="btn btn-primary col-md-1" >模板</button>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="inInput">
+		</div>
 	</div>
 	</div>
 	
 	<script type="text/javascript">
- 
+ 		var funcInOption = function(){
+ 			var _inOption = document.getElementById("inOption");
+ 			var _inInput = document.getElementById("inInput");
+ 			var addOptions = function(target,options){
+ 				var _option = null;
+ 				var ol = options.length;
+ 				var _v = "";
+ 				var _t = "";
+ 				for(var i=0; i<ol ;i++){
+ 					_v = options[i].value;
+ 					_t = options[i].text;
+ 					_option = document.createElement("OPTION");
+ 					_option.value = _v;
+ 					_option.text = _t;
+ 					target.options.add(_option);
+ 				}
+ 			};
+ 			_inInput.onkeyup = function(){
+ 				var key = event.keyCode;
+ 				var _v = _inInput.value;
+ 				if(key == 13){ //输入回车时，保存输入框到下拉框中
+ 					addOptions(_inOption,[
+	 					{
+	 						"value":_v,
+	 						"text":_v
+	 					}
+ 					]);
+ 				}
+ 			}
+ 			_inOption.onchange = function(){
+ 				_inInput.value = this.value;
+ 			}
+ 		};
+ 		addLoadEvent(funcInOption);
 	</script>
 	<hr>
 	<!-- **************************************************************************** -->
