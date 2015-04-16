@@ -18,6 +18,18 @@
 		//console.time() --- console.timeEnd() 实现计时
 		console.timeEnd("times");
 		console.profileEnd();
+		var isIE = function(){
+			return !!window.ActiveXObject;
+		}
+		var isIE6 = function(){
+			return isIE() && !window.XMLHttpRequest;
+		}
+		var isIE7 = function(){
+			return isIE() && isIE6() && !isIE8();
+		}
+		var isIE8 = function(){
+			return isIE() && !!document.documentMode;
+		}
 	</script>
 	<!-- 此处禁用js -->
 	<noscript>

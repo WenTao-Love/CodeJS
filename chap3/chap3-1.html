@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script type="text/javascript">
+		function addLoadEvent(func){
+                var oldonload = window.onload;
+                if(typeof window.onload != 'function'){
+                    window.onload = func;
+                }else{
+                    window.onload = function(){
+                        oldonload();
+                        func();
+                    }
+                }
+            }
+	</script>
+</head>
+<body>
+	<!-- **************************************************************************** -->
+	<p class="h3">实时预览上传的图片</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div id="previewIng"><img src="" class="img-thumbnail" id="previewImgSrc"></div>
+			<input type="file" class="form-control" id="upPreviewImg">
+		</div>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+		var funcPreView = function(){
+			var upPreviewImg = function(options){
+				var _e = options.e;
+				var preloadImg = null;
+				_e.onchange = function(){
+					var _v = this.value;
+					var _body = document.body;
+					var picReg = /(.JPEG|.jpeg|.JPG|.jpg|.GIF|.gif|.BMP|.bmp|.PNG|.png){1}/;
+					if(!picReg.test(_v)){
+						alert("请选择正确的图片格式！");
+						return false;
+					}
+					if(typeof FileReader != 'undefined'){
+						var reader = new FileReader();
+						var _file = this.files[0];
+						reader.onload = (function(file){
+							return function(){
+								options.previewImgSrc.setAttribute("src",this.result);
+								options.previewImgSrc.style.display = "block";
+							}
+						})(_file);
+						reader.onerror = function(){
+							alert("文件读取数据出错！");
+						}
+						reader.readAsDataURL(_file);
+					}else{
+						alert("不支持！");
+					}
+				}
+			}
+			upPreviewImg({
+				"e":document.getElementById("upPreviewImg"),
+				"previewImgSrc":document.getElementById("previewImgSrc")
+			});
+		};
+		addLoadEvent(funcPreView);
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+	<p class="h3">鼠标移入、移出时改变图片的样式</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<img src="../angel.jpg" class="img-thumbnail" id="imgChangeStyle">
+		</div>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+ 		var funcImgChangeStyle = function(){
+ 			var imgChangeStyle = document.getElementById("imgChangeStyle");
+ 			imgChangeStyle.onmouseover = function(){
+ 				imgChangeStyle.className = "img-circle";
+ 			}
+ 			imgChangeStyle.onmouseout = function(){
+ 				imgChangeStyle.className = "img-thumbnail";
+ 			}
+ 		};
+ 		addLoadEvent(funcImgChangeStyle);
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+	<p class="h3">示例内容</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control">
+		</div>
+		<button type="button" class="btn btn-primary col-md-1" >模板</button>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+ 
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+	<p class="h3">示例内容</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control">
+		</div>
+		<button type="button" class="btn btn-primary col-md-1" >模板</button>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+ 
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+	<p class="h3">示例内容</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control">
+		</div>
+		<button type="button" class="btn btn-primary col-md-1" >模板</button>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+ 
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+</script>
+</body>
+</html>
