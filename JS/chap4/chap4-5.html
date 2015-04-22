@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script type="text/javascript">
+		function addLoadEvent(func){
+                var oldonload = window.onload;
+                if(typeof window.onload != 'function'){
+                    window.onload = func;
+                }else{
+                    window.onload = function(){
+                        oldonload();
+                        func();
+                    }
+                }
+            }
+	</script>
+</head>
+<body>
+	<!-- **************************************************************************** -->
+		<p class="h3">让层随意拖动</p>
+	<div id="bindDrawElement">被拖动的层！鼠标按下——移动！</div>
+	<div style="position:relative;top:50px;height:10px">     </div>
+	<style type="text/css">
+		#bindDrawElement{
+			border: 1px solid #ccc;
+		}
+	</style>
+	<script type="text/javascript">
+ 		var funcBindDrawElement = function(){
+ 			var _mousepos = {
+ 				"_top":0,
+ 				"left":0
+ 			};
+ 			var getMousePoint = function(_e){
+ 				var _body = document.body;
+ 				var _left = 0;
+ 				var _top = 0;
+ 				if(typeof window.pageYOffset != 'undefined'){
+ 					_left = window.pageXOffset;
+ 					_top = window.pageYOffset;
+ 				}else if(typeof document.compatMode != 'undefined' && document.compatMode !='BackCompat'){
+ 					_left = document.documentElement.scrollLeft;
+ 					_top = document.documentElement.scrollTop;
+ 				}else if(typeof _body != 'undefined'){
+ 					_left = _body.scrollLeft;
+ 					_top = _body.scrollTop;
+ 				}
+ 				_left += _e.clientX;
+ 				_top += _e.clientY;
+
+ 				_mousepos.left = _left;
+ 				_mousepos.top = _top;
+
+ 				return _mousepos;
+ 			};
+ 			var getAbsoluteLeft = function(_e){
+ 				var _left = _e.offsetLeft;
+ 				var _current = _e.offsetParent;
+ 				while(_current !== null){
+ 					_left += _current.offsetLeft;
+ 					_current = _current.offsetParent;
+ 				}
+ 				return _left;
+ 			};
+ 			var getAbsoluteTop = function(_e){
+ 				var _top = _e.offsetTop;
+ 				var _current = _e.offsetParent;
+ 				while(_current !== null){
+ 					_top += _current.offsetTop;
+ 					_current = _current.offsetParent;
+ 				}
+ 				return _top;
+ 			};
+ 			var setCss = function(_this,cssOption){
+ 				if(!_this || _this.nodeType === 3 || _this.nodeType === 8 || !_this.style){
+ 					return;
+ 				}
+ 				for(var cs in cssOption){
+ 					_this.style[cs] = cssOption[cs];
+ 				}
+ 				return _this;
+ 			};
+ 			var drawElement = null;
+ 			var isDrawElement = false;
+ 			var startDrawPos = null;
+ 			//监听鼠标的按下和抬起事件，按下时，设置移动监听isDrawElment为true；抬起时，为false.
+ 			function bindDrawElement(e){
+ 				drawElement = e;
+ 				var absoluteLeft = getAbsoluteLeft(e);
+ 				var absoluteTop = getAbsoluteTop(e);
+ 				setCss(e,{
+ 					"position":"absolute",
+ 					"left":absoluteLeft+"px",
+ 					"top":absoluteTop+"px",
+ 					"cursor":"move",
+ 					"zIndex":101
+ 				});
+ 				e.onmousedown = function(event){
+ 					event = event || window.event;
+ 					var _pos = getMousePoint(event);
+ 					isDrawElement = true;
+ 					startDrawPos = {
+ 						"left":_pos.left - getAbsoluteLeft(this),
+ 						"top":_pos.top - getAbsoluteTop(this)
+ 					}
+ 				}
+ 				e.onmouseup = function(event){
+ 					isDrawElement = false;
+ 				}
+ 			};
+ 			function moveDraw(event){
+ 				if(isDrawElement){//当为真时，表明鼠标在移动DIV，进行重绘
+ 					event = event || window.event;
+ 					var _pos = getMousePoint(event);
+ 					setCss(drawElement,{
+ 						"left":(_pos.left-startDrawPos.left)+"px",
+ 						"top":(_pos.top-startDrawPos.top)+"px"
+ 					});
+ 				}
+ 			};
+ 			bindDrawElement(document.getElementById("bindDrawElement"));
+ 			document.body.onmousemove = function(e){//监听鼠标移动事件
+ 				moveDraw(e);
+ 			}
+ 		};
+ 		addLoadEvent(funcBindDrawElement);
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+	<p class="h3">示例内容</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control">
+		</div>
+		<button type="button" class="btn btn-primary col-md-1" >模板</button>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+ 
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+</script>
+</body>
+</html>
