@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script type="text/javascript">
+		function addLoadEvent(func){
+                var oldonload = window.onload;
+                if(typeof window.onload != 'function'){
+                    window.onload = func;
+                }else{
+                    window.onload = function(){
+                        oldonload();
+                        func();
+                    }
+                }
+            }
+	</script>
+</head>
+<body>
+	<!-- **************************************************************************** -->
+	<p class="h3">第一题</p>
+	["1","2","3"].map(parseInt)结果是？<button type="button" class="btn btn-primary" id="question1">模板</button>
+	<script type="text/javascript">
+ 		document.getElementById("question1").onclick = function(){
+ 			alert(["1","2","3"].map(parseInt));
+ 		}
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+</script>
+</body>
+</html>
