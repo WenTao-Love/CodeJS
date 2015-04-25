@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script type="text/javascript">
+		function addLoadEvent(func){
+                var oldonload = window.onload;
+                if(typeof window.onload != 'function'){
+                    window.onload = func;
+                }else{
+                    window.onload = function(){
+                        oldonload();
+                        func();
+                    }
+                }
+            }
+	</script>
+</head>
+<body>
+	<!-- **************************************************************************** -->
+	<p class="h3">判断IE浏览器</p>
+	<div class="container">
+	<div class="row">
+		点击按钮，判断是否为IE浏览器：
+		if(!+[1,])
+		<button type="button" class="btn btn-primary col-md-1" id="test1">测试</button>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+	// appCodeName       返回浏览器的代码名。    
+	// appMinorVersion    返回浏览器的次级版本。    
+	// appName               返回浏览器的名称。    
+	// appVersion           返回浏览器的平台和版本信息。    
+	// browserLanguage    返回当前浏览器的语言。    
+	// cookieEnabled      返回指明浏览器中是否启用 cookie 的布尔值。    
+	// cpuClass               返回浏览器系统的 CPU 等级。    
+	// onLine                  返回指明系统是否处于脱机模式的布尔值。    
+	// platform                 返回运行浏览器的操作系统平台。    
+	// systemLanguage    返回 OS 使用的默认语言。    
+	// userAgent             返回由客户机发送服务器的 user-agent 头部的值。    
+	// userLanguage    返回 OS 的自然语言设置。
+ 		var funcTest1 = function(){
+ 			function isIE(){
+ 				return ("ActiveXObject" in window);//参考http://www.5ycode.com/353
+	      	}
+	      	function isIE6() {
+	          	return navigator.userAgent.split(";")[1].toLowerCase().indexOf("msie 6.0")=="-1"?false:true;
+	      	}
+	      	function isIE7(){
+	       	   return navigator.userAgent.split(";")[1].toLowerCase().indexOf("msie 7.0")=="-1"?false:true;
+	      	}
+	     	function isIE8(){
+	          	return navigator.userAgent.split(";")[1].toLowerCase().indexOf("msie 8.0")=="-1"?false:true;
+	      	}
+	      	function isNN(){
+	         	return navigator.userAgent.indexOf("Netscape")!=-1;
+	      	}
+	      	function isOpera(){
+	          	return navigator.userAgent.indexOf("Opera")!=-1;
+	      	}
+	      	function isFF(){
+	          	return navigator.userAgent.indexOf("Firefox")!=-1;
+	      	}
+	      	function isChrome(){
+	          	return navigator.userAgent.indexOf("Chrome") > -1;
+	      	}
+ 			document.getElementById("test1").onclick = function(){
+ 				if(isIE()){
+	 				if(isIE8()){
+	 					alert("IE8");
+	 				}else if(isIE7()){
+	 					alert("IE7");
+	 				}else if(isIE6()){
+	 					alert("IE6");
+	 				}else{
+	 					alert("IE");
+	 				}
+ 				}else if(isFF()){
+ 					alert("fire fox");
+ 				}else if(isChrome()){
+ 					alert("Chrome");
+ 				}else if(isOpera()){
+ 					alert("Opera");
+ 				}else{
+ 					alert("else");
+ 				}
+ 			}
+ 		};
+ 		addLoadEvent(funcTest1);
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+	<p class="h3">示例内容</p>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control">
+		</div>
+		<button type="button" class="btn btn-primary col-md-1" >模板</button>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+ 
+	</script>
+	<hr>
+	<!-- **************************************************************************** -->
+</script>
+</body>
+</html>
